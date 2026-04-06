@@ -1,7 +1,7 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+  import vfxGallery from './components/vfxGallery.vue';
 </script>
 
 <template>
-  <HelloWorld />
+  <vfxGallery />
 </template>
