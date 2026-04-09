@@ -138,8 +138,11 @@
 
 <style scoped>
   .gallery-header {
-    width: 100%;
-    margin-bottom: 20px;
+    /* width: 100%;
+    margin-bottom: 20px; */
+
+    max-width: max-content;
+    margin: 0 auto 20px auto;
   }
 
   .counter {
@@ -163,15 +166,19 @@
     border: 1px solid #DDD;
     border-radius: 6px;
     color: #333;
+    width: 100%;
   }
 
   .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 300px);
+    grid-template-columns: repeat(auto-fit, 300px);
     grid-auto-rows: auto;
     justify-content: center; 
-    gap: 30px; /* This gap is inherited by subgrids unless overridden */
-    width: 100%;
+    gap: 30px; 
+    width: max-content;
+    max-width: 100%;
+    margin: 0 auto; 
+    box-sizing: border-box;
   }
 
   .vfx-card.compact {
