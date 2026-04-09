@@ -1,8 +1,8 @@
 <template>
   <nav class="main-nav">
     <div class="nav-links">
-      <router-link to="/">Home</router-link>
-      <router-link to="/games">Games</router-link>
+      <!-- <router-link to="/">Home</router-link>
+      <router-link to="/games">Games</router-link> -->
       <div class="dropdown">
         <button class="dropbtn">Projects ▾</button>
         <div class="dropdown-content">

@@ -1,56 +1,51 @@
 <script setup>
-import { ref, computed } from 'vue';
+  import { ref, computed } from 'vue';
 
-const modules = import.meta.glob('/public/archive/**/*.json', { eager: true });
+  const modules = import.meta.glob('/public/archive/**/*.json', { eager: true });
 
-// State for Search and Filter
-const searchQuery = ref('');
-const selectedTag = ref('');
+  const searchQuery = ref('');
+  const selectedTag = ref('');
 
-const allProjects = computed(() => {
-  const projects = [];
-  Object.keys(modules).forEach((path) => {
-    const data = modules[path].default || modules[path];
-    const pathParts = path.split('/');
-    const semester = pathParts[3]; 
-    const studentFolder = pathParts[4];
-    const assetBase = `/archive/${semester}/${studentFolder}/`;
+  const allProjects = computed(() => {
+    const projects = [];
+    Object.keys(modules).forEach((path) => {
+      const data = modules[path].default || modules[path];
+      const pathParts = path.split('/');
+      const semester = pathParts[3]; 
+      const studentFolder = pathParts[4];
+      const assetBase = `/archive/${semester}/${studentFolder}/`;
 
-    if (data.projects) {
-      data.projects.forEach((proj, index) => {
-        // Create a unique slug for routing: "john-doe-reactive-fire"
-        const slug = `${data.author.name}-${proj.project_title}`.toLowerCase().replace(/\s+/g, '-');
-        
-        projects.push({
-          ...proj,
-          id: slug,
-          authorName: data.author.name,
-          videoUrl: `${assetBase}${proj.video_file}`,
-          semesterLabel: proj.semester || semester
+      if (data.projects) {
+        data.projects.forEach((proj) => {
+          const slug = `${data.author.name}-${proj.project_title}`.toLowerCase().replace(/\s+/g, '-');
+          projects.push({
+            ...proj,
+            id: slug,
+            authorName: data.author.name,
+            videoUrl: `${assetBase}${proj.video_file}`,
+            semesterLabel: proj.semester || semester
+          });
         });
-      });
-    }
+      }
+    });
+    return projects;
   });
-  return projects;
-});
 
-// The Search Logic
-const filteredProjects = computed(() => {
-  return allProjects.value.filter(p => {
-    const searchTerm = searchQuery.value.toLowerCase();
-    const matchesSearch = p.project_title.toLowerCase().includes(searchTerm) || 
-                          p.authorName.toLowerCase().includes(searchTerm);
-    const matchesTag = !selectedTag.value || p.tags.includes(selectedTag.value);
-    return matchesSearch && matchesTag;
+  const filteredProjects = computed(() => {
+    return allProjects.value.filter(p => {
+      const searchTerm = searchQuery.value.toLowerCase();
+      const matchesSearch = p.project_title.toLowerCase().includes(searchTerm) || 
+                            p.authorName.toLowerCase().includes(searchTerm);
+      const matchesTag = !selectedTag.value || p.tags.includes(selectedTag.value);
+      return matchesSearch && matchesTag;
+    });
   });
-});
 
-// Extract unique tags for the filter dropdown
-const allTags = computed(() => {
-  const tags = new Set();
-  allProjects.value.forEach(p => p.tags.forEach(t => tags.add(t)));
-  return Array.from(tags).sort();
-});
+  const allTags = computed(() => {
+    const tags = new Set();
+    allProjects.value.forEach(p => p.tags.forEach(t => tags.add(t)));
+    return Array.from(tags).sort();
+  });
 </script>
 
 <template>
@@ -87,10 +82,8 @@ const allTags = computed(() => {
         </div>
 
         <div class="card-body">
-          <div class="card-meta">
-            <h2>{{ project.project_title }}</h2>
-            <code class="semester-code">{{ project.semesterLabel }}</code>
-          </div>
+          <h2>{{ project.project_title }}</h2>
+          <code class="semester-code">{{ project.semesterLabel }}</code>
           <span class="author-subtext">by {{ project.authorName }}</span>
         </div>
       </router-link>
@@ -99,46 +92,96 @@ const allTags = computed(() => {
 </template>
 
 <style scoped>
-.filter-controls {
-  display: flex;
-  gap: 15px;
-  margin-top: 24px;
-  justify-content: center;
-}
+  .filter-controls {
+    display: flex;
+    gap: 15px;
+    margin-top: 24px;
+    justify-content: center;
+  }
 
-.search-input, .tag-select {
-  padding: 10px 15px;
-  background: var(--code-bg);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  color: var(--text-h);
-  font-family: var(--sans);
-}
+  .search-input, .tag-select {
+    padding: 10px 15px;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-h);
+    font-family: var(--sans);
+  }
 
-.vfx-card.compact {
-  text-decoration: none;
-  /* Make cards smaller as requested */
-  max-width: 300px; 
-}
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    grid-auto-rows: auto;
+    justify-content: space-between; 
+    gap: 15px;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 32px;
+    box-sizing: border-box;
+  }
 
-.vfx-card.compact h2 {
-  font-size: 1rem;
-  margin: 0;
-}
+  .vfx-card.compact {
+    text-decoration: none;
+    max-width: 300px; 
+    border: 1px solid #DDD;
+    border-radius: 15px;
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 4;
+    margin-bottom: 30px;
+  }
 
-.author-subtext {
-  font-size: 0.8rem;
-  color: var(--text);
-  display: block;
-  margin-top: 4px;
-}
+  .media-container {
+    grid-row: 1;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-image: url('src/assets/missing-thumb.png'); 
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.media-container video {
-  pointer-events: none; /* Prevents controls from showing on hover */
-}
+  .media-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 1;
+    pointer-events: none; 
+  }
 
-/* Ensure the grid handles smaller cards well */
-.project-grid {
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-}
+  .card-body {
+    grid-row: span 3;
+    display: grid;
+    grid-template-rows: subgrid;
+    justify-items: center;
+    margin-bottom: 15px;
+  }
+
+  .vfx-card.compact h2 {
+    grid-row: 1;
+    font-size: 1rem;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .semester-code {
+    background-color: #AAA;
+    color: #333;
+    font-size: 12px;
+    align-self: center;
+    width: fit-content;
+    grid-row: 2;
+  }
+
+  .author-subtext {
+    grid-row: 3;
+    font-size: 0.8rem;
+    color: var(--text);
+    display: block;
+  }
 </style>
