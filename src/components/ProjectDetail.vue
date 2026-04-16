@@ -1,60 +1,24 @@
 <script setup>
   import { ref, watch, onMounted } from 'vue';
   import { useRoute } from 'vue-router';
-
-  const modules = import.meta.glob('/src/archive/**/*.json', { eager: true });
-  
-  const buildArchive = () => {
-    const list = [];
-    for (const path in modules) {
-      const data = modules[path]?.default || modules[path];
-      if (!data?.author || !data?.projects) continue;
-
-      const pathParts = path.split('/');
-      const semesterFolder = pathParts[3];
-
-      data.projects.forEach((proj) => {
-        const authorSlug = data.author.name.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
-        const titleSlug = proj.project_title.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
-        const slug = `${authorSlug}-${titleSlug}`;
-        
-        list.push({
-          ...proj,
-          id: slug,
-          authorName: data.author.name,
-          videoUrl: proj.video_file, 
-          semesterLabel: proj.semester || semesterFolder
-        });
-      });
-    }
-    return list;
-  };
-
-  const STATIC_ARCHIVE = buildArchive();
+  import CodeBlock from '@/components/CodeBlock.vue';
+  import PdfViewer from '@/components/PdfViewer.vue';
 
   const route = useRoute();
   const project = ref(null);
   const authorWork = ref([]);
 
-  const syncProject = () => {
-    const targetId = route.params.id;
-    const found = STATIC_ARCHIVE.find(p => p.id === targetId);
-    
-    if (found) {
-      project.value = found;
-      authorWork.value = STATIC_ARCHIVE.filter(p => 
-        p.authorName === found.authorName && p.id !== found.id
-      );
-    } else {
-      project.value = null;
-      authorWork.value = [];
-    }
+  const modules = import.meta.glob('/src/archive/**/*.json', { eager: true });
+  const pdfModules = import.meta.glob('/src/archive/**/*.pdf', { eager: true, query: '?url', import: 'default' });
+  
+  const ensureArray = (val) => {
+    if (!val) return [];
+    return Array.isArray(val) ? val : [val];
   };
 
   const getYouTubeId = (url) => {
     if (!url) return null;
-    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-    const match = url.match(regExp);
+    const match = url.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/);
     return (match && match[7].length === 11) ? match[7] : null;
   };
 
@@ -80,12 +44,82 @@
     return '';
   };
 
-  watch(() => route.params.id, () => {
-    syncProject();
-  });
+  const buildArchive = () => {
+    const list = [];
+    for (const path in modules) {
+      const data = modules[path]?.default || modules[path];
+      if (!data?.author || !data?.projects) continue;
+
+      const pathParts = path.split('/');
+      const folderName = pathParts[pathParts.length - 2];
+      const semesterFolder = pathParts[pathParts.length - 3];
+
+      data.projects.forEach((proj) => {
+        const authorSlug = data.author.name.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+        const titleSlug = proj.project_title.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+        const slug = `${authorSlug}-${titleSlug}`;
+        
+        const blueprints = ensureArray(proj.blueprint_url);
+        const fileNames = ensureArray(proj.codeFile);
+        const fileLangs = ensureArray(proj.codeLang);
+        const pdfFiles = ensureArray(proj.pdf_file);
+        const videoUrls = ensureArray(proj.video_file);
+
+        const resolvedPdfs = pdfFiles.map(fileName => {
+          const targetSearch = `${folderName}/${fileName}`;
+          const foundKey = Object.keys(pdfModules).find(key => key.includes(targetSearch));
+          return {
+            name: fileName,
+            url: foundKey ? pdfModules[foundKey] : null
+          };
+        });
+
+        list.push({
+          ...proj,
+          id: slug,
+          authorName: data.author.name,
+          folderName: folderName,
+          semesterLabel: proj.semester || semesterFolder,
+          videoUrls: videoUrls, 
+          blueprints: blueprints,
+          pdfs: resolvedPdfs, 
+          normalizedCodeFiles: fileNames.map((name, index) => ({
+            name: name,
+            lang: fileLangs[index] || fileLangs[0] || 'clike'
+          }))
+        });
+      });
+    }
+    return list;
+  };
+
+  const STATIC_ARCHIVE = buildArchive();
+
+  const syncProject = () => {
+    const targetId = route.params.id;
+    const found = STATIC_ARCHIVE.find(p => p.id === targetId);
+    
+    if (found) {
+      project.value = found;
+      authorWork.value = STATIC_ARCHIVE.filter(p => 
+        p.authorName === found.authorName && p.id !== found.id
+      );
+    } else {
+      project.value = null;
+      authorWork.value = [];
+    }
+  };
+
+  watch(
+    () => route.params.id, 
+    () => {
+      syncProject();
+      window.scrollTo(0, 0);
+    }, 
+    { immediate: true }
+  );
 
   onMounted(() => {
-    syncProject();
     window.scrollTo(0, 0);
   });
 </script>
@@ -94,29 +128,48 @@
   <div class="page-background">
     <div v-if="project" class="detail-container">
       <div class="main-content">
-        <div class="video-wrapper">
-          <iframe 
-            v-if="getYouTubeId(project.videoUrl) || getVimeoId(project.videoUrl)"
-            :src="getEmbedUrl(project.videoUrl)"
-            class="hero-media"
-            frameborder="0"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-          
-          <video v-else autoplay muted loop controls class="hero-media">
-            <source :src="project.videoUrl" type="video/mp4">
-          </video>
+
+        <div v-if="project.videoUrls.length > 0" class="videos-section">
+          <div v-for="(url, index) in project.videoUrls" :key="index" class="video-wrapper">
+             <iframe 
+                v-if="getYouTubeId(url) || getVimeoId(url)"
+                :src="getEmbedUrl(url)"
+                class="hero-media"
+                frameborder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+              
+              <video v-else autoplay muted loop controls class="hero-media">
+                <source :src="url" type="video/mp4">
+              </video>
+          </div>
         </div>
         
-        <div v-if="project.blueprint_url" class="blueprint-viewer">
-          <h3>Logic & Implementation</h3>
-          <iframe :src="project.blueprint_url" width="100%" height="600" scrolling="no" allowfullscreen></iframe>
+        <div v-if="project.blueprints.length > 0" class="blueprints-section">
+          <div v-for="(url, index) in project.blueprints" :key="index" class="blueprint-viewer">
+             <iframe :src="url" width="100%" height="655px" scrolling="no" frameborder="0" allowfullscreen></iframe>
+          </div>
         </div>
 
-        <div class="project-description">
-          <h3>About the Piece</h3>
-          <p>{{ project.description }}</p>
+        <div v-if="project.normalizedCodeFiles.length > 0" class="project-code-section">
+          <div v-for="(code, index) in project.normalizedCodeFiles" :key="index" class="code-entry">
+            <CodeBlock 
+              :authorFolder="project.folderName" 
+              :fileName="code.name" 
+              :lang="code.lang" 
+            />
+          </div>
+        </div>
+
+        <div v-if="project.pdfs.length > 0" class="project-pdf-section">
+          <h2>Tutorial and Documentation</h2>
+          <div v-for="(pdf, index) in project.pdfs" :key="index" class="pdf-entry">
+            <PdfViewer 
+              :pdfUrl="pdf.url" 
+              :fileName="pdf.name" 
+            />
+          </div>
         </div>
       </div>
 
@@ -129,15 +182,15 @@
           
           <div class="specs-panel">
             <div class="spec-row">
-              <span class="label">Engine</span>
+              <span class="label">Unreal Version:</span>
               <span class="value">{{ project.engine_version }}</span>
             </div>
             <div class="spec-row">
-              <span class="label">Complexity</span>
+              <span class="label">Complexity:</span>
               <span class="value">{{ project.instruction_count }} Nodes</span>
             </div>
             <div class="spec-row">
-              <span class="label">Semester</span>
+              <span class="label">Semester:</span>
               <span class="value">{{ project.semesterLabel }}</span>
             </div>
             <div v-if="project.tags" class="tag-cloud">
@@ -145,11 +198,21 @@
             </div>
           </div>
 
+          <div class="project-description">
+            <h3>About the Piece</h3>
+            <p>{{ project.description }}</p>
+          </div>
+
           <div v-if="authorWork.length > 0" class="related-section">
             <h4>Other Projects by this Researcher</h4>
             <div class="mini-grid">
-              <router-link v-for="other in authorWork" :key="other.id" :to="'/project/' + other.id" class="mini-card">
-                <img :src="getThumbnailUrl(other.videoUrl)" alt="" />
+              <router-link 
+                v-for="other in authorWork" 
+                :key="other.id" 
+                :to="{ name: 'project-detail', params: { id: other.id } }" 
+                class="mini-card"
+              >
+                <img :src="getThumbnailUrl(other.videoUrls[0])" alt="" />
                 <p>{{ other.project_title }}</p>
               </router-link>
             </div>
@@ -194,7 +257,7 @@
     background: #000;
     border-radius: 4px;
     overflow: hidden;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
   }
 
@@ -205,19 +268,40 @@
     border: none;
   }
 
-  .blueprint-viewer {
-    margin-bottom: 40px;
-    background: #111;
-    padding: 20px;
-    border-radius: 8px;
-  }
-
-  .blueprint-viewer h3 {
-    color: #fff;
-    font-size: 0.9rem;
+  .subsection-label {
+    color: #aaa;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 15px;
+  }
+
+  .blueprint-viewer {
+    width: 100%;
+    overflow: hidden;
+    height: fit-content;
+    margin-bottom: 30px;
+    background: #FFF;
+    padding: 0px;
+  }
+
+  iframe {
+    border: none;
+  }
+  
+  .project-code-section h2 {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+  }
+
+  .code-entry {
+    margin-bottom: 30px;
+  }
+
+  .project-description {
+    margin-top: 60px;
+    margin-bottom: 40px;
   }
 
   .project-description h3 {
@@ -234,6 +318,10 @@
   .sticky-content {
     position: sticky;
     top: 40px;
+  }
+
+  .project-header {
+    margin-bottom: 45px;
   }
 
   .project-header h1 {

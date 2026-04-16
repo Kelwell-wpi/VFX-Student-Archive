@@ -1,25 +1,30 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import vfxGallery from '../components/vfxGallery.vue'
 import ProjectDetail from '../components/ProjectDetail.vue'
-
 
 const routes = [
   { 
     path: '/', 
-    component: vfxGallery 
-  },
-  { 
-    path: '/vfx', 
+    name: 'gallery',
     component: vfxGallery 
   },
   { 
     path: '/project/:id', 
+    name: 'project-detail',
     component: ProjectDetail,
     props: true
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/'
   }
 ]
 
 export const router = createRouter({
-  history: createWebHashHistory(), 
-  routes
+  // Use WebHistory for clean URLs
+  history: createWebHistory('/IMGD-Student-Archive/'), 
+  routes,
+  scrollBehavior() {
+    return { top: 0 }
+  }
 })

@@ -1,0 +1,30 @@
+void main() {
+  vec2 p = uv();
+  float r = 0.; 
+  float g = 0.; 
+  float b = 0.; 
+  float frequency = 5.;
+  float gain = 1.;
+  float thickness = sin(.3)*0.8;
+
+  for( float i = 0.; i < 1.; i++ ) { 
+    p.x += sin( p.y + time * i) * sin(gain); 
+    r += abs( thickness / sin(p.x) );
+  }
+  
+  for( float i = 0.; i < 1.; i++ ) { 
+    p.x += sin( p.y*2. + time * i) * tan(gain); 
+    g += abs( thickness / tan(p.x));
+  }
+ 
+  vec3 colors = vec3(r,g,b);
+  vec2 rg = vec2(r, g);
+  vec2 rot = rotate(rg, p, thickness);
+  
+    for( float i = 0.; i < 1.; i++ ) { 
+    rot.x += sin( rot.y + time * i) * cos(gain); 
+    b +=  abs(thickness / cos(p.x));
+  }
+
+  gl_FragColor = vec4(r,g,b,1);
+}

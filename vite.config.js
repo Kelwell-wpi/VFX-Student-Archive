@@ -1,14 +1,14 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { fileURLToPath, URL } from 'node:url' // Standard Vite way to resolve paths
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [vue()],
+  assetsInclude: ['**/*.pdf'],
   base: '/IMGD-Student-Archive/', 
   resolve: {
     alias: {
-      '@': '/src',
+      '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
 })
-

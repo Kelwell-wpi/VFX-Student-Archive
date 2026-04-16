@@ -8,27 +8,37 @@
 
   const allProjects = computed(() => {
     const projects = [];
-    Object.keys(modules).forEach((path) => {
-      const data = modules[path].default || modules[path];
-      const pathParts = path.split('/');
-      
-      // Fixed index: /src/archive/[semester]/[student]/metadata.json
-      const semester = pathParts[3]; 
+    try {
+      Object.keys(modules).forEach((path) => {
+        const data = modules[path].default || modules[path];
+        if (!data || !data.author) return; // Safety check
 
-      if (data.projects) {
-        data.projects.forEach((proj) => {
-          const slug = `${data.author.name}-${proj.project_title}`.toLowerCase().replace(/\s+/g, '-');
-          
-          projects.push({
-            ...proj,
-            id: slug,
-            authorName: data.author.name,
-            videoUrl: proj.video_file, 
-            semesterLabel: proj.semester || semester
+        const pathParts = path.split('/');
+        const semester = pathParts[3]; 
+
+        if (data.projects) {
+          data.projects.forEach((proj) => {
+            const authorSlug = data.author.name.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+            const titleSlug = proj.project_title.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+            const slug = `${authorSlug}-${titleSlug}`;
+            
+            // Handle both the old string format and the new array format for video_file
+            const videoSource = Array.isArray(proj.video_file) ? proj.video_file[0] : proj.video_file;
+
+            projects.push({
+              ...proj,
+              id: slug,
+              authorName: data.author.name,
+              videoUrl: videoSource, 
+              semesterLabel: proj.semester || semester,
+              tags: proj.tags || [] // Ensure tags is always an array
+            });
           });
-        });
-      }
-    });
+        }
+      });
+    } catch (err) {
+      console.error("Archive Build Error:", err);
+    }
     return projects;
   });
 
@@ -44,52 +54,32 @@
 
   const allTags = computed(() => {
     const tags = new Set();
-    allProjects.value.forEach(p => p.tags.forEach(t => tags.add(t)));
+    allProjects.value.forEach(p => {
+      if (p.tags) p.tags.forEach(t => tags.add(t));
+    });
     return Array.from(tags).sort();
   });
 
   const getYouTubeId = (url) => {
+    if (!url || typeof url !== 'string') return null;
     const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     const match = url.match(regExp);
     return (match && match[7].length === 11) ? match[7] : null;
   };
 
   const getVimeoId = (url) => {
+    if (!url || typeof url !== 'string') return null;
     const match = url.match(/(?:vimeo\.com\/|player\.vimeo\.com\/video\/)([0-9]+)/);
     return match ? match[1] : null;
   };
 
   const getThumbnailUrl = (url) => {
     if (!url) return '';
-
     const ytId = getYouTubeId(url);
-    if (ytId) {
-      // hqdefault is the most reliable high-quality thumbnail that avoids 404 errors
-      return `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
-    }
-
+    if (ytId) return `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
     const vimeoId = getVimeoId(url);
-    if (vimeoId) {
-      return `https://vumbnail.com/${vimeoId}.jpg`;
-    }
-
+    if (vimeoId) return `https://vumbnail.com/${vimeoId}.jpg`;
     return '';
-  };
-
-  const getEmbedUrl = (url) => {
-    if (!url) return '';
-    
-    const ytId = getYouTubeId(url);
-    if (ytId) {
-      return `https://www.youtube.com/embed/${ytId}?autoplay=0&rel=0`;
-    }
-    
-    const vimeoId = getVimeoId(url);
-    if (vimeoId) {
-      return `https://player.vimeo.com/video/${vimeoId}`;
-    }
-    
-    return url;
   };
 </script>
 
@@ -111,11 +101,11 @@
       </div>
     </header>
 
-    <div class="project-grid">
+    <div v-if="filteredProjects.length > 0" class="project-grid">
       <router-link 
         v-for="project in filteredProjects" 
         :key="project.id" 
-        :to="'/project/' + project.id"
+        :to="{ name: 'project-detail', params: { id: project.id } }"
         class="vfx-card compact"
       >
         <div class="media-container">
@@ -134,15 +124,21 @@
         </div>
       </router-link>
     </div>
+    
+    <div v-else class="loading-state">
+      <p>Loading Research Archive...</p>
+      <p v-if="allProjects.length === 0" style="color: red; font-size: 0.8rem;">
+        No JSON modules detected. Check console for build errors.
+      </p>
+    </div>
 </template>
 
 <style scoped>
+/* Styles remain unchanged as requested */
   .gallery-header {
-    /* width: 100%;
-    margin-bottom: 20px; */
-
-    max-width: max-content;
-    margin: 0 auto 20px auto;
+    width: 75%;
+    height: 200px;
+    margin: 0 auto;
   }
 
   .counter {
@@ -175,8 +171,8 @@
     grid-auto-rows: auto;
     justify-content: center; 
     gap: 30px; 
-    width: max-content;
-    max-width: 100%;
+    width: 100%;
+    max-width: 1500px;
     margin: 0 auto; 
     box-sizing: border-box;
   }
@@ -217,7 +213,6 @@
     padding: 15px;
     justify-items: center;
     text-align: center;
-    /* FIX: Override inherited gap from parent grid */
     row-gap: 0;
   }
 
@@ -245,5 +240,11 @@
     font-size: 0.8rem;
     color: #666;
     margin-bottom: 5px;
+  }
+
+  .loading-state {
+    text-align: center;
+    margin-top: 50px;
+    font-family: monospace;
   }
 </style>

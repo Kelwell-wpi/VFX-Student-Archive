@@ -14,19 +14,21 @@
       "tags": ["Niagara", "Lumen", "Metasounds"],
       "engine_version": "5.7.4",
       "instruction_count": 184,
-      "blueprint_url": "https://blueprintue.com/render/xxxx1/",
       "video_file": "https://www.youtube.com/watch?v=_finh_LUEpk",
       "description": "Exploration of linking Metasound envelope followers to Niagara spawn rates to create a storm that reacts to audio amplitude."
     },
     {
       "course_id": "IMGD-3000",
       "semester": "2026-Spring",
-      "project_title": "Procedural Lightning Ribbon",
-      "tags": ["HLSL", "Ribbon-Emitter", "Lumen"],
+      "project_title": "~/SUDO/ Ensemble Live Performance reactive visuals",
+      "tags": ["Boids", "Audio Reactive", "p5.js"],
       "engine_version": "5.7.4",
       "instruction_count": 92,
-      "blueprint_url": "https://blueprintue.com/render/xxxx2/",
-      "video_file": "https://www.youtube.com/watch?v=aeqiRsgjF0I",
+      "pdf_file": ["test.pdf", "260406 - SINE Lab - Minutes.pdf"],
+      "blueprint_url": ["https://blueprintue.com/render/0o9ctgif/", "https://blueprintue.com/render/6n73vnn1/"],
+      "codeFile": ["test.txt", "shader.txt"],
+      "codeLang": ["glsl", "HLSL"],
+      "video_file": ["https://www.youtube.com/watch?v=aeqiRsgjF0I", "https://www.youtube.com/watch?v=11_Q6PGhdFs"],
       "description": "A custom HLSL shader driving a Niagara ribbon emitter to simulate branching lightning strikes with real-time Lumen emission."
     },
     {
@@ -36,7 +38,6 @@
       "tags": ["EmberGen", "VDB", "Volumetrics"],
       "engine_version": "5.8.0",
       "instruction_count": 310,
-      "blueprint_url": "https://blueprintue.com/render/xxxx3/",
       "video_file": "https://www.youtube.com/watch?v=11_Q6PGhdFs",
       "description": "Integration of EmberGen VDB exports into Unreal using the new volumetric rendering pipeline for realistic fire and smoke."
     }
