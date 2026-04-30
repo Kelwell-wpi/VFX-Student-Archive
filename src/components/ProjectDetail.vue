@@ -28,11 +28,20 @@
     return match ? match[1] : null;
   };
 
+  const getGoogleDriveId = (url) => {
+  if (!url) return null;
+  // This regex looks for the unique ID between /d/ and /view
+  const match = url.match(/\/d\/([^/]+)/);
+  return match ? match[1] : null;
+};
+
   const getEmbedUrl = (url) => {
     const ytId = getYouTubeId(url);
     if (ytId) return `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&loop=1&playlist=${ytId}&rel=0`;
     const vimeoId = getVimeoId(url);
     if (vimeoId) return `https://player.vimeo.com/video/${vimeoId}?autoplay=1&muted=1&loop=1`;
+    const gdId = getGoogleDriveId(url);
+    if (gdId) return `https://drive.google.com/file/d/${gdId}/preview`;
     return url;
   };
 
@@ -41,6 +50,8 @@
     if (ytId) return `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
     const vimeoId = getVimeoId(url);
     if (vimeoId) return `https://vumbnail.com/${vimeoId}.jpg`;
+    const gdId = getGoogleDriveId(url);
+    if (gdId) return `https://drive.google.com/thumbnail?id=${gdId}&sz=w1280`;
     return '';
   };
 

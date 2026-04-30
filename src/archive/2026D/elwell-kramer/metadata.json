@@ -10,11 +10,11 @@
     {
       "course_id": "IMGD-3000",
       "semester": "2026-Spring",
-      "project_title": "Audio-Reactive Niagara Storm",
+      "project_title": "Dream Defenders Test",
       "tags": ["Niagara", "Lumen", "Metasounds"],
       "engine_version": "5.7.4",
       "instruction_count": 184,
-      "video_file": "https://www.youtube.com/watch?v=_finh_LUEpk",
+      "video_file": "https://drive.google.com/file/d/1XGDKbhhqzTigmHJhzDhwwjiVTMMehrqw/view?usp=sharing",
       "description": "Exploration of linking Metasound envelope followers to Niagara spawn rates to create a storm that reacts to audio amplitude."
     },
     {

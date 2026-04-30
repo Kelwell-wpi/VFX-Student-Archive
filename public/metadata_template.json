@@ -1,0 +1,56 @@
+{
+  "author": {
+    "name": "YOUR NAME",
+    "graduation_year": "WHEN DO YOU GRADUATE?",
+    "major": "WHAT IS YOUR MAJOR / SPECIALIZATION",
+    "contact_email": "YOUR_EMAIL@wpi.edu",
+    "portfolio_url": "https://YOUR_WEBSITE_(if_you_have_one).com",
+
+    "instructions": "Fill out all relevant fields in this document. If you are not using a field (i.e., you don't have any code blocks) then fully delete that field. Within the 'projects' array below, include 1 entry for each of your experiments. You can copy and past for additional projects."
+  },
+
+  "projects": [
+    {
+      "course_id": "IMGD-4099",
+      "term": "D-Term 2026",
+      "project_title": "YOUR FIRST PROJECT TITLE",
+      "engine_version": "5.7.4",
+      "description": "Write a short 1-2 sentence description of your project. 100 words maximum.",
+
+      "tags":           ["Niagara", "Lumen", "Metasounds", "ADD ANY USEFUL TAGS"], 
+      "video_file":     ["https://www.YOUTUBELINK1.com","https://www.YOUTUBELINK2.com"],
+      "pdf_file":       ["PDF_FILE1.pdf", "PDF_FILE2.pdf"],
+      "blueprint_url":  ["https://blueprintue.com/render/YOURBLUEPRINT1/", "https://blueprintue.com/render/YOURBLUEPRINT2/"],
+      "codeFile":       ["CODEBLOCK1.txt", "CODEBLOCK2.txt"],
+      "codeLang":       ["Language for CODEBLOCK1.txt", "language for CODEBLOCK2.txt"]
+    },
+    {
+      "course_id": "IMGD-4099",
+      "term": "D-Term 2026",
+      "project_title": "YOUR FIRST PROJECT TITLE",
+      "engine_version": "5.7.4",
+      "description": "Write a short 1-2 sentence description of your project. 100 words maximum.",
+      
+      "tags":           ["Niagara", "Lumen", "Metasounds", "ADD ANY USEFUL TAGS"], 
+      "video_file":     ["https://www.YOUTUBELINK1.com","https://www.YOUTUBELINK2.com"],
+      "pdf_file":       ["PDF_FILE1.pdf", "PDF_FILE2.pdf"],
+      "blueprint_url":  ["https://blueprintue.com/render/YOURBLUEPRINT1/", "https://blueprintue.com/render/YOURBLUEPRINT2/"],
+      "codeFile":       ["CODEBLOCK1.txt", "CODEBLOCK2.txt"],
+      "codeLang":       ["Language for CODEBLOCK1.txt", "language for CODEBLOCK2.txt"]
+    },
+    {
+      "course_id": "IMGD-4099",
+      "term": "D-Term 2026",
+      "project_title": "YOUR FIRST PROJECT TITLE",
+      "engine_version": "5.7.4",
+      "description": "Write a short 1-2 sentence description of your project. 100 words maximum.",
+      
+      "tags":           ["Niagara", "Lumen", "Metasounds", "ADD ANY USEFUL TAGS"], 
+      "video_file":     ["https://www.YOUTUBELINK1.com","https://www.YOUTUBELINK2.com"],
+      "pdf_file":       ["PDF_FILE1.pdf", "PDF_FILE2.pdf"],
+      "blueprint_url":  ["https://blueprintue.com/render/YOURBLUEPRINT1/", "https://blueprintue.com/render/YOURBLUEPRINT2/"],
+      "codeFile":       ["CODEBLOCK1.txt", "CODEBLOCK2.txt"],
+      "codeLang":       ["Language for CODEBLOCK1.txt", "language for CODEBLOCK2.txt"]
+    }
+  ]
+}
