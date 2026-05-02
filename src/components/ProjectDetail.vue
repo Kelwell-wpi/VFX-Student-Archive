@@ -3,6 +3,7 @@
   import { useRoute } from 'vue-router';
   import CodeBlock from '@/components/CodeBlock.vue';
   import PdfViewer from '@/components/PdfViewer.vue';
+  import TutorialViewer from './tutorialViewer.vue';
 
   const route = useRoute();
   const project = ref(null);
@@ -29,19 +30,21 @@
   };
 
   const getGoogleDriveId = (url) => {
-  if (!url) return null;
-  // This regex looks for the unique ID between /d/ and /view
-  const match = url.match(/\/d\/([^/]+)/);
-  return match ? match[1] : null;
-};
+    if (!url) return null;
+    const match = url.match(/\/d\/([^/]+)/);
+    return match ? match[1] : null;
+  };
 
   const getEmbedUrl = (url) => {
     const ytId = getYouTubeId(url);
-    if (ytId) return `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&loop=1&playlist=${ytId}&rel=0`;
+    if (ytId) return `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&loop=1&playlist=${ytId}`;
+
     const vimeoId = getVimeoId(url);
     if (vimeoId) return `https://player.vimeo.com/video/${vimeoId}?autoplay=1&muted=1&loop=1`;
+
     const gdId = getGoogleDriveId(url);
     if (gdId) return `https://drive.google.com/file/d/${gdId}/preview`;
+
     return url;
   };
 
@@ -142,34 +145,31 @@
 
         <div v-if="project.videoUrls.length > 0" class="videos-section">
           <div v-for="(url, index) in project.videoUrls" :key="index" class="video-wrapper">
-             <iframe 
-                v-if="getYouTubeId(url) || getVimeoId(url)"
-                :src="getEmbedUrl(url)"
-                class="hero-media"
-                frameborder="0"
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowfullscreen
-              ></iframe>
-              
-              <video v-else autoplay muted loop controls class="hero-media">
-                <source :src="url" type="video/mp4">
-              </video>
+            
+            <iframe 
+              v-if="getYouTubeId(url) || getVimeoId(url) || getGoogleDriveId(url)"
+              :src="getEmbedUrl(url)"
+              class="hero-media"
+              frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowfullscreen
+              :referrerpolicy="getGoogleDriveId(url) ? 'no-referrer' : 'strict-origin-when-cross-origin'"
+            ></iframe>
+            
+            <video v-else autoplay muted loop controls class="hero-media">
+              <source :src="url" type="video/mp4">
+            </video>
+
           </div>
         </div>
+
+        <section v-if="project.hasTutorial" class="tutorial-section">
+          <TutorialViewer :path="project.archivePath" />
+        </section>
         
         <div v-if="project.blueprints.length > 0" class="blueprints-section">
           <div v-for="(url, index) in project.blueprints" :key="index" class="blueprint-viewer">
              <iframe :src="url" width="100%" height="655px" scrolling="no" frameborder="0" allowfullscreen></iframe>
-          </div>
-        </div>
-
-        <div v-if="project.normalizedCodeFiles.length > 0" class="project-code-section">
-          <div v-for="(code, index) in project.normalizedCodeFiles" :key="index" class="code-entry">
-            <CodeBlock 
-              :authorFolder="project.folderName" 
-              :fileName="code.name" 
-              :lang="code.lang" 
-            />
           </div>
         </div>
 
@@ -179,6 +179,16 @@
             <PdfViewer 
               :pdfUrl="pdf.url" 
               :fileName="pdf.name" 
+            />
+          </div>
+        </div>
+
+        <div v-if="project.normalizedCodeFiles.length > 0" class="project-code-section">
+          <div v-for="(code, index) in project.normalizedCodeFiles" :key="index" class="code-entry">
+            <CodeBlock 
+              :authorFolder="project.folderName" 
+              :fileName="code.name" 
+              :lang="code.lang" 
             />
           </div>
         </div>
@@ -197,11 +207,7 @@
               <span class="value">{{ project.engine_version }}</span>
             </div>
             <div class="spec-row">
-              <span class="label">Complexity:</span>
-              <span class="value">{{ project.instruction_count }} Nodes</span>
-            </div>
-            <div class="spec-row">
-              <span class="label">Semester:</span>
+              <span class="label">Term:</span>
               <span class="value">{{ project.semesterLabel }}</span>
             </div>
             <div v-if="project.tags" class="tag-cloud">

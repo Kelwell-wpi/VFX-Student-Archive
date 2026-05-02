@@ -1,44 +1,48 @@
 {
   "author": {
     "name": "Dennis Field",
-    "graduation_year": "2027",
-    "major": "CS/IMGD",
-    "contact_email": "jdoe@wpi.edu",
-    "portfolio_url": "https://janedoe.com"
+    "graduation_year": "2026",
+    "major": "CS/IMGD B.S.",
+    "contact_email": "djfield@wpi.edu"
   },
+
   "projects": [
     {
-      "course_id": "IMGD-3000",
-      "semester": "2026-Spring",
-      "project_title": "Audio-Reactive Niagara Storm",
-      "tags": ["Niagara", "Lumen", "Metasounds"],
+      "course_id": "IMGD-4099",
+      "term": "D-Term 2026",
+      "project_title": "Configurable BOID Simulation",
       "engine_version": "5.7.4",
-      "instruction_count": 184,
-      "blueprint_url": "https://blueprintue.com/render/xxxx1/",
-      "video_file": "storm-vfx-demo.mp4",
-      "description": "Exploration of linking Metasound envelope followers to Niagara spawn rates to create a storm that reacts to audio amplitude."
+      "description": "A Niagara system simulation that replications BOIDs, the natural movement of flocks. Uses particle cohesion, alignment, and separation within custom scratch pad modules and simulation stages to reproduce fluid movement.",
+
+      "tags":           ["Niagara", "Simulation", "BOID", "Sprite", "Scratch Pad", "Simulation Stage"], 
+      "video_file":     ["https://youtu.be/E5jFdfnbvqs","https://youtu.be/jUAZF9LUmjY"],
+      "pdf_file":       ["BOID - Tutorial Write Up.pdf", "BOID - System Overview.pdf"],
+      "blueprint_url":  ["https://blueprintue.com/render/wvwjy-3q/", "https://blueprintue.com/render/i4vxof10/", "https://blueprintue.com/render/zxsq6tzi/", "https://blueprintue.com/render/ilk7vc2w/"],
+      "codeFile":       "bib.txt",
+      "codeLang":       "txt"
     },
     {
-      "course_id": "IMGD-3000",
-      "semester": "2026-Spring",
-      "project_title": "Procedural Lightning Ribbon",
-      "tags": ["HLSL", "Ribbon-Emitter", "Lumen"],
+      "course_id": "IMGD-4099",
+      "term": "D-Term 2026",
+      "project_title": "Dissolving Material",
       "engine_version": "5.7.4",
-      "instruction_count": 92,
-      "blueprint_url": "https://blueprintue.com/render/xxxx2/",
-      "video_file": "lightning-vfx-demo.mp4",
-      "description": "A custom HLSL shader driving a Niagara ribbon emitter to simulate branching lightning strikes with real-time Lumen emission."
+      "description": "A small material function that allows models to appear as though they are disintegrading or disolving. As a function it is able to be included in any pre-existing material and is highly customizable with varying noise options.",
+      
+      "tags":           ["Material", "Function", "Modular", "Noise", "Animation", "Transparency", "Float Curves"], 
+      "video_file":     ["https://youtu.be/YaiFcOoN4HI"],
+      "blueprint_url":  ["https://blueprintue.com/render/j40uzk4m/", "https://blueprintue.com/render/nhahd5i9/"]
     },
     {
-      "course_id": "IMGD-4000",
-      "semester": "2026-Fall",
-      "project_title": "Advanced Fluid Dynamics",
-      "tags": ["EmberGen", "VDB", "Volumetrics"],
-      "engine_version": "5.8.0",
-      "instruction_count": 310,
-      "blueprint_url": "https://blueprintue.com/render/xxxx3/",
-      "video_file": "fluid-vfx-demo.mp4",
-      "description": "Integration of EmberGen VDB exports into Unreal using the new volumetric rendering pipeline for realistic fire and smoke."
+      "course_id": "IMGD-4099",
+      "term": "D-Term 2026",
+      "project_title": "Model-based Ash Emitter",
+      "engine_version": "5.7.4",
+      "description": "A Niagara system that uses the connected mesh's surface as a spawn map. Allows for directional control through randomized cone velocity and unique motion powered by a curl noise force.",
+      
+      "tags":           ["Niagara", "Sprite", "Mesh Reproduction", "Noise", "Float Curves"], 
+      "video_file":     ["https://youtu.be/VqC2RDgWHtw","https://youtu.be/633B7m_1Clc"],
+      "pdf_file":       ["Ash Emitter - System Overview.pdf"],
+      "blueprint_url":  ["https://blueprintue.com/render/kvhjf0wm/"]
     }
   ]
 }

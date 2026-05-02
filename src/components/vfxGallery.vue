@@ -74,12 +74,20 @@
     return match ? match[1] : null;
   };
 
+  const getGoogleDriveId = (url) => {
+    if (!url) return null;
+    const match = url.match(/\/d\/([^/]+)/);
+    return match ? match[1] : null;
+  };
+
   const getThumbnailUrl = (url) => {
     if (!url) return '';
     const ytId = getYouTubeId(url);
     if (ytId) return `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
     const vimeoId = getVimeoId(url);
     if (vimeoId) return `https://vumbnail.com/${vimeoId}.jpg`;
+    const gdId = getGoogleDriveId(url);
+    if (gdId) return `https://drive.google.com/thumbnail?id=${gdId}&sz=w1280`;
     return '';
   };
 </script>
@@ -114,8 +122,10 @@
             v-if="project.videoUrl"
             :src="getThumbnailUrl(project.videoUrl)" 
             @error="(e) => e.target.src = missingThumb"
+            referrerpolicy="no-referrer"
             class="gallery-thumb"
-          />
+            alt="Video Thumbnail"
+          />  
         </div>
 
         <div class="card-body">

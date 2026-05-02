@@ -38,8 +38,10 @@
       "tags": ["EmberGen", "VDB", "Volumetrics"],
       "engine_version": "5.8.0",
       "instruction_count": 310,
-      "video_file": "https://www.youtube.com/watch?v=11_Q6PGhdFs",
-      "description": "Integration of EmberGen VDB exports into Unreal using the new volumetric rendering pipeline for realistic fire and smoke."
+      "video_file": "https://vimeo.com/292934510?fl=pl&fe=sh",
+      "description": "Testing to see if this updates",
+      "hasTutorial": true,
+      "archivePath": "2026D/elwell-kramer/T1"
     }
   ]
 }

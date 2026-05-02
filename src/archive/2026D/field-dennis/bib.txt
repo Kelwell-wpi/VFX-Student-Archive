@@ -1,0 +1,59 @@
+Bibliography
+
+CGHOW. 2022a. “Unreal Engine Niagara Skeletal Mesh Disintegration Effect Tutorial | Download Project Files.” YouTube. August 11, 2022. https://www.youtube.com/shorts/EvCvqWQ9aMA.
+
+———. 2022b. “Unreal Engine Thanos Disintegration in Niagara Tutorial.” YouTube. August 11, 2022. https://www.youtube.com/shorts/BjmAMCEXtOY.
+
+CodeLikeMe. 2021. “Unreal Niagara Character VFX Tutorial - Disintegrate and Blown Away.” YouTube. September 5, 2021. https://www.youtube.com/watch?v=c6e2NXWdMHo.
+
+Faucher, William. 2022. “Lighting in Unreal Engine 5 for Beginners.” Www.youtube.com. June 10, 2022. https://www.youtube.com/watch?v=fSbBsXbjxPo.
+
+Game Dev Academy. 2015. “What Is a Shader? | Pixel and Vertex Shaders.” YouTube. May 26, 2015. https://www.youtube.com/watch?v=TDZMSozKZ20.
+
+———. 2018. “#1 Mastering UV Mapping in Maya | Maya 2018 UV Mapping Tutorial.” YouTube. November 7, 2018. https://www.youtube.com/watch?v=noOCGGAWFvE.
+
+InspirationTuts. 2024. “Textures vs Materials vs Shaders: What You Need to Know!” YouTube. May 17, 2024. https://www.youtube.com/watch?v=CBX9Esfnx5I.
+
+JangaFX VFX Software & Tutorials. 2023. “EmberGen 1.0 Tutorial: Getting Started with the UI.” YouTube. June 14, 2023. https://www.youtube.com/watch?v=Wwu4KrdYBY8.
+
+———. 2026. “Creating Curl Noise Textures with IlluGen.” YouTube. January 16, 2026. https://www.youtube.com/watch?v=rUo_AD7JPcw.
+
+Josh's Channel. 2022. “How Ray Tracing (Modern CGI) Works and How to Do It 600x Faster.” Www.youtube.com. August 13, 2022. https://www.youtube.com/watch?v=gsZiJeaMO48.
+
+kiwivi. 2023. “GeoGen Basics in Depth Tutorial.” YouTube. December 4, 2023. https://www.youtube.com/watch?v=8Qpu_a37j-Y.
+
+Nine Between. 2023. “What Are Voxels? - Speedy Houdini.” YouTube. February 10, 2023. https://www.youtube.com/watch?v=dSDuR-45W6Y.
+
+Overlord Gaming. 2018. “What Is Baked Lighting? (Lightmap).” YouTube. March 17, 2018. https://www.youtube.com/watch?v=eGmXDOGjKPA.
+
+Phil LUO. 2025. “UE5 Niagara Raymarching Sphere.” YouTube. July 3, 2025. https://www.youtube.com/watch?v=AgKSuBC01gI.
+
+Pitchfork Academy. 2026a. “How to Create a Dissolve Effect - Unreal Engine 5 Material Tutorial.” YouTube. January 1, 2026. https://www.youtube.com/watch?v=rHMYL_0GFPU.
+
+———. 2026b. “How to Create a Procedural Decay System - Unreal Engine 5 Material Tutorial.” YouTube. February 15, 2026. https://www.youtube.com/watch?v=OCgrHAHKmuM.
+
+PixTrick. 2024. “Unity Shaders - a Quick Overview (in 3 Minutes).” YouTube. April 5, 2024. https://www.youtube.com/watch?v=cjTyB_dFe6s.
+
+pwnisher. 2024. “Unreal Engine Materials in 6 Levels of Complexity.” YouTube. May 11, 2024. https://www.youtube.com/watch?v=iZgbzwBQTPY.
+
+SARKAMARI. 2023. “#UE5 Series: The Beginner’s Guide to Niagara.” YouTube. July 22, 2023. https://www.youtube.com/watch?v=SAAZRWBry_I.
+
+Sebastian Lague. 2024. “Coding Adventure: Rendering Fluids.” YouTube. December 6, 2024. https://www.youtube.com/watch?v=kOkfC5fLfgE.
+
+sem schreuder. 2022. “Control Your Niagara Particle System with Textures.” YouTube. January 8, 2022. https://www.youtube.com/watch?v=Rdg6nolEGQE.
+
+Sensei, Unreal. 2022. “Unreal Engine 5 Beginner Tutorial - UE5 Starter Course 2022.” Www.youtube.com. June 30, 2022. https://www.youtube.com/watch?v=k-zMkzmduqI.
+
+Studio Cloé. 2023. “Tutorial: Dissolve Anything Using Standard Shapes, or Static Mesh in Unreal Engine.” YouTube. October 5, 2023. https://www.youtube.com/watch?v=jy_lOuaZuX8.
+
+Udacity. 2015. “Light Mapping - Interactive 3D Graphics.” YouTube. February 23, 2015. https://www.youtube.com/watch?v=wj_UuzQQk2Y.
+
+Unreal Sensei. 2025. “Unreal Engine Beginner Tutorial 5.6 Update.” YouTube. June 25, 2025. https://www.youtube.com/watch?v=GWremmdhmdg
+
+.Unreal University. 2025. “How to Make a Dissolve Effect in Unreal Engine 5 - Tutorial.” YouTube. May 6, 2025. https://www.youtube.com/watch?v=w-qef3-pTBY.
+
+Walt Disney Animation Studios. 2016. “Disney’s Practical Guide to Path Tracing.” YouTube Video. YouTube. https://www.youtube.com/watch?v=frLwRLS_ZR0.
+
+William Faucher. 2021a. “Bake Lighting FASTER with GPU Lightmass - Unreal Engine 4.26.” YouTube. March 30, 2021. https://www.youtube.com/watch?v=hq1WFFF6iD0.
+
+———. 2021b. “Lumen Explained - IMPORTANT Tips for UE5.” Www.youtube.com. December 16, 2021. https://www.youtube.com/watch?v=1e6oOiKh91U.
