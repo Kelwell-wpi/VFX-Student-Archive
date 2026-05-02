@@ -1,17 +1,21 @@
 <script setup>
-  import { ref, watch, onMounted } from 'vue';
-  import { useRoute } from 'vue-router';
-  import CodeBlock from '@/components/CodeBlock.vue';
-  import PdfViewer from '@/components/PdfViewer.vue';
-  import TutorialViewer from './tutorialViewer.vue';
+  import { ref, watch, onMounted } from "vue";
+  import { useRoute } from "vue-router";
+  import CodeBlock from "@/components/CodeBlock.vue";
+  import PdfViewer from "@/components/PdfViewer.vue";
+  import TutorialViewer from "./tutorialViewer.vue";
 
   const route = useRoute();
   const project = ref(null);
   const authorWork = ref([]);
 
-  const modules = import.meta.glob('/src/archive/**/*.json', { eager: true });
-  const pdfModules = import.meta.glob('/src/archive/**/*.pdf', { eager: true, query: '?url', import: 'default' });
-  
+  const modules = import.meta.glob("/src/archive/**/*.json", { eager: true });
+  const pdfModules = import.meta.glob("/src/archive/**/*.pdf", {
+    eager: true,
+    query: "?url",
+    import: "default",
+  });
+
   const ensureArray = (val) => {
     if (!val) return [];
     return Array.isArray(val) ? val : [val];
@@ -19,13 +23,17 @@
 
   const getYouTubeId = (url) => {
     if (!url) return null;
-    const match = url.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/);
-    return (match && match[7].length === 11) ? match[7] : null;
+    const match = url.match(
+      /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/,
+    );
+    return match && match[7].length === 11 ? match[7] : null;
   };
 
   const getVimeoId = (url) => {
     if (!url) return null;
-    const match = url.match(/(?:vimeo\.com\/|player\.vimeo\.com\/video\/)([0-9]+)/);
+    const match = url.match(
+      /(?:vimeo\.com\/|player\.vimeo\.com\/video\/)([0-9]+)/,
+    );
     return match ? match[1] : null;
   };
 
@@ -37,10 +45,12 @@
 
   const getEmbedUrl = (url) => {
     const ytId = getYouTubeId(url);
-    if (ytId) return `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&loop=1&playlist=${ytId}`;
+    if (ytId)
+      return `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&loop=1&playlist=${ytId}`;
 
     const vimeoId = getVimeoId(url);
-    if (vimeoId) return `https://player.vimeo.com/video/${vimeoId}?autoplay=1&muted=1&loop=1`;
+    if (vimeoId)
+      return `https://player.vimeo.com/video/${vimeoId}?autoplay=1&muted=1&loop=1`;
 
     const gdId = getGoogleDriveId(url);
     if (gdId) return `https://drive.google.com/file/d/${gdId}/preview`;
@@ -55,7 +65,7 @@
     if (vimeoId) return `https://vumbnail.com/${vimeoId}.jpg`;
     const gdId = getGoogleDriveId(url);
     if (gdId) return `https://drive.google.com/thumbnail?id=${gdId}&sz=w1280`;
-    return '';
+    return "";
   };
 
   const buildArchive = () => {
@@ -64,27 +74,37 @@
       const data = modules[path]?.default || modules[path];
       if (!data?.author || !data?.projects) continue;
 
-      const pathParts = path.split('/');
+      const pathParts = path.split("/");
       const folderName = pathParts[pathParts.length - 2];
       const semesterFolder = pathParts[pathParts.length - 3];
 
       data.projects.forEach((proj) => {
-        const authorSlug = data.author.name.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
-        const titleSlug = proj.project_title.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+        const authorSlug = data.author.name
+          .toLowerCase()
+          .trim()
+          .replace(/\s+/g, "-")
+          .replace(/[^\w-]/g, "");
+        const titleSlug = proj.project_title
+          .toLowerCase()
+          .trim()
+          .replace(/\s+/g, "-")
+          .replace(/[^\w-]/g, "");
         const slug = `${authorSlug}-${titleSlug}`;
-        
+
         const blueprints = ensureArray(proj.blueprint_url);
         const fileNames = ensureArray(proj.codeFile);
         const fileLangs = ensureArray(proj.codeLang);
         const pdfFiles = ensureArray(proj.pdf_file);
         const videoUrls = ensureArray(proj.video_file);
 
-        const resolvedPdfs = pdfFiles.map(fileName => {
+        const resolvedPdfs = pdfFiles.map((fileName) => {
           const targetSearch = `${folderName}/${fileName}`;
-          const foundKey = Object.keys(pdfModules).find(key => key.includes(targetSearch));
+          const foundKey = Object.keys(pdfModules).find((key) =>
+            key.includes(targetSearch),
+          );
           return {
             name: fileName,
-            url: foundKey ? pdfModules[foundKey] : null
+            url: foundKey ? pdfModules[foundKey] : null,
           };
         });
 
@@ -94,13 +114,13 @@
           authorName: data.author.name,
           folderName: folderName,
           semesterLabel: proj.semester || semesterFolder,
-          videoUrls: videoUrls, 
+          videoUrls: videoUrls,
           blueprints: blueprints,
-          pdfs: resolvedPdfs, 
+          pdfs: resolvedPdfs,
           normalizedCodeFiles: fileNames.map((name, index) => ({
             name: name,
-            lang: fileLangs[index] || fileLangs[0] || 'clike'
-          }))
+            lang: fileLangs[index] || fileLangs[0] || "clike",
+          })),
         });
       });
     }
@@ -111,12 +131,12 @@
 
   const syncProject = () => {
     const targetId = route.params.id;
-    const found = STATIC_ARCHIVE.find(p => p.id === targetId);
-    
+    const found = STATIC_ARCHIVE.find((p) => p.id === targetId);
+
     if (found) {
       project.value = found;
-      authorWork.value = STATIC_ARCHIVE.filter(p => 
-        p.authorName === found.authorName && p.id !== found.id
+      authorWork.value = STATIC_ARCHIVE.filter(
+        (p) => p.authorName === found.authorName && p.id !== found.id,
       );
     } else {
       project.value = null;
@@ -125,12 +145,12 @@
   };
 
   watch(
-    () => route.params.id, 
+    () => route.params.id,
     () => {
       syncProject();
       window.scrollTo(0, 0);
-    }, 
-    { immediate: true }
+    },
+    { immediate: true },
   );
 
   onMounted(() => {
@@ -141,66 +161,92 @@
 <template>
   <div class="page-background">
     <div v-if="project" class="detail-container">
-      <div class="main-content">
-
+      <main class="main-content">
         <div v-if="project.videoUrls.length > 0" class="videos-section">
-          <div v-for="(url, index) in project.videoUrls" :key="index" class="video-wrapper">
-            
-            <iframe 
-              v-if="getYouTubeId(url) || getVimeoId(url) || getGoogleDriveId(url)"
+          <div
+            v-for="(url, index) in project.videoUrls"
+            :key="index"
+            class="video-wrapper"
+          >
+            <iframe
+              v-if="
+                getYouTubeId(url) || getVimeoId(url) || getGoogleDriveId(url)
+              "
               :src="getEmbedUrl(url)"
               class="hero-media"
               frameborder="0"
               allow="autoplay; fullscreen; picture-in-picture"
               allowfullscreen
-              :referrerpolicy="getGoogleDriveId(url) ? 'no-referrer' : 'strict-origin-when-cross-origin'"
+              :referrerpolicy="
+                getGoogleDriveId(url)
+                  ? 'no-referrer'
+                  : 'strict-origin-when-cross-origin'
+              "
             ></iframe>
-            
             <video v-else autoplay muted loop controls class="hero-media">
-              <source :src="url" type="video/mp4">
+              <source :src="url" type="video/mp4" />
             </video>
-
           </div>
         </div>
 
         <section v-if="project.hasTutorial" class="tutorial-section">
           <TutorialViewer :path="project.archivePath" />
         </section>
-        
+
         <div v-if="project.blueprints.length > 0" class="blueprints-section">
-          <div v-for="(url, index) in project.blueprints" :key="index" class="blueprint-viewer">
-             <iframe :src="url" width="100%" height="655px" scrolling="no" frameborder="0" allowfullscreen></iframe>
+          <div
+            v-for="(url, index) in project.blueprints"
+            :key="index"
+            class="blueprint-viewer"
+          >
+            <iframe
+              :src="url"
+              width="100%"
+              height="655px"
+              scrolling="no"
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
           </div>
         </div>
 
         <div v-if="project.pdfs.length > 0" class="project-pdf-section">
           <h2>Tutorial and Documentation</h2>
-          <div v-for="(pdf, index) in project.pdfs" :key="index" class="pdf-entry">
-            <PdfViewer 
-              :pdfUrl="pdf.url" 
-              :fileName="pdf.name" 
-            />
+          <div
+            v-for="(pdf, index) in project.pdfs"
+            :key="index"
+            class="pdf-entry"
+          >
+            <PdfViewer :pdfUrl="pdf.url" :fileName="pdf.name" />
           </div>
         </div>
 
-        <div v-if="project.normalizedCodeFiles.length > 0" class="project-code-section">
-          <div v-for="(code, index) in project.normalizedCodeFiles" :key="index" class="code-entry">
-            <CodeBlock 
-              :authorFolder="project.folderName" 
-              :fileName="code.name" 
-              :lang="code.lang" 
+        <div
+          v-if="project.normalizedCodeFiles.length > 0"
+          class="project-code-section"
+        >
+          <div
+            v-for="(code, index) in project.normalizedCodeFiles"
+            :key="index"
+            class="code-entry"
+          >
+            <CodeBlock
+              :authorFolder="project.folderName"
+              :fileName="code.name"
+              :lang="code.lang"
             />
           </div>
         </div>
-      </div>
+      </main>
 
-      <aside class="sidebar">
-        <div class="sticky-content">
-          <header class="project-header">
+      <aside class="sidebar-aside">
+        <!-- HEADER SECTION (Top on mobile) -->
+        <header class="project-info-header">
+          <div class="project-header">
             <h1>{{ project.project_title }}</h1>
             <p class="author-tag">By {{ project.authorName }}</p>
-          </header>
-          
+          </div>
+
           <div class="specs-panel">
             <div class="spec-row">
               <span class="label">Unreal Version:</span>
@@ -211,7 +257,9 @@
               <span class="value">{{ project.semesterLabel }}</span>
             </div>
             <div v-if="project.tags" class="tag-cloud">
-              <span v-for="tag in project.tags" :key="tag" class="pill">{{ tag }}</span>
+              <span v-for="tag in project.tags" :key="tag" class="pill">{{
+                tag
+              }}</span>
             </div>
           </div>
 
@@ -219,14 +267,16 @@
             <h3>About the Piece</h3>
             <p>{{ project.description }}</p>
           </div>
+        </header>
 
+        <footer class="related-footer">
           <div v-if="authorWork.length > 0" class="related-section">
             <h4>Other Projects by this Researcher</h4>
             <div class="mini-grid">
-              <router-link 
-                v-for="other in authorWork" 
-                :key="other.id" 
-                :to="{ name: 'project-detail', params: { id: other.id } }" 
+              <router-link
+                v-for="other in authorWork"
+                :key="other.id"
+                :to="{ name: 'project-detail', params: { id: other.id } }"
                 class="mini-card"
               >
                 <img :src="getThumbnailUrl(other.videoUrls[0])" alt="" />
@@ -234,14 +284,15 @@
               </router-link>
             </div>
           </div>
-
           <router-link to="/" class="nav-back">← Back to Archive</router-link>
-        </div>
+        </footer>
       </aside>
     </div>
 
     <div v-else class="empty-state">
-      <p>Unable to locate project: <code>{{ $route.params.id }}</code></p>
+      <p>
+        Unable to locate project: <code>{{ $route.params.id }}</code>
+      </p>
       <router-link to="/">Return to Archive</router-link>
     </div>
   </div>
@@ -255,17 +306,63 @@
   }
 
   .detail-container {
-    max-width: 1440px;
+    max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 50px;
-    padding: 60px 20px;
+    grid-template-areas:
+      "info"
+      "main"
+      "footer";
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 40px 20px;
     text-align: left;
   }
 
+  .project-info-header {
+    grid-area: info;
+  }
   .main-content {
+    grid-area: main;
     min-width: 0;
+  }
+  .related-footer {
+    grid-area: footer;
+  }
+
+  .sidebar-aside {
+    display: contents;
+  }
+
+  @media (min-width: 1025px) {
+    .detail-container {
+      grid-template-areas: "main sidebar";
+      grid-template-columns: 1fr 380px;
+      grid-template-rows: auto;
+      gap: 60px;
+      padding: 60px 40px;
+      align-items: start;
+    }
+
+    .sidebar-aside {
+      display: flex;
+      flex-direction: column;
+      grid-area: sidebar;
+      position: sticky;
+      top: 40px;
+      height: fit-content;
+    }
+
+    .project-info-header,
+    .related-footer {
+      grid-area: auto;
+    }
+
+    .related-footer {
+      margin-top: 40px;
+      border-top: 1px solid #eee;
+      padding-top: 40px;
+    }
   }
 
   .video-wrapper {
@@ -275,7 +372,7 @@
     border-radius: 4px;
     overflow: hidden;
     margin-bottom: 30px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   }
 
   .hero-media {
@@ -285,40 +382,24 @@
     border: none;
   }
 
-  .subsection-label {
-    color: #aaa;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-  }
-
   .blueprint-viewer {
     width: 100%;
     overflow: hidden;
-    height: fit-content;
     margin-bottom: 30px;
-    background: #FFF;
-    padding: 0px;
+    background: #fff;
   }
 
-  iframe {
-    border: none;
-  }
-  
-  .project-code-section h2 {
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-    margin-bottom: 25px;
+  .project-header h1 {
+    font-size: 2.2rem;
+    line-height: 1.1;
+    margin: 0 0 10px 0;
+    color: #1a1a1a;
   }
 
-  .code-entry {
-    margin-bottom: 30px;
-  }
-
-  .project-description {
-    margin-top: 60px;
-    margin-bottom: 40px;
+  .author-tag {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 20px;
   }
 
   .project-description h3 {
@@ -332,34 +413,11 @@
     color: #444;
   }
 
-  .sticky-content {
-    position: sticky;
-    top: 40px;
-  }
-
-  .project-header {
-    margin-bottom: 45px;
-  }
-
-  .project-header h1 {
-    font-size: 2.2rem;
-    line-height: 1.1;
-    margin: 0 0 10px 0;
-    color: #1a1a1a;
-  }
-
-  .author-tag {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 30px;
-  }
-
   .specs-panel {
     background: #fcfcfc;
     border: 1px solid #efefef;
     padding: 25px;
     border-radius: 12px;
-    margin-bottom: 40px;
   }
 
   .spec-row {
@@ -368,9 +426,15 @@
     margin-bottom: 12px;
     font-size: 0.9rem;
   }
-
-  .spec-row .label { color: #999; text-transform: uppercase; font-size: 0.75rem; }
-  .spec-row .value { font-weight: 600; color: #333; }
+  .spec-row .label {
+    color: #999;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+  }
+  .spec-row .value {
+    font-weight: 600;
+    color: #333;
+  }
 
   .tag-cloud {
     display: flex;
@@ -409,7 +473,9 @@
     transition: transform 0.2s ease;
   }
 
-  .mini-card:hover { transform: translateY(-3px); }
+  .mini-card:hover {
+    transform: translateY(-3px);
+  }
 
   .mini-card img {
     width: 100%;
@@ -432,16 +498,12 @@
     text-decoration: none;
     font-size: 0.9rem;
     margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
   }
 
   .empty-state {
     padding: 100px 20px;
     text-align: center;
-  }
-
-  @media (max-width: 1024px) {
-    .detail-container { grid-template-columns: 1fr; }
-    .sidebar { order: 2; }
-    .main-content { order: 1; }
   }
 </style>

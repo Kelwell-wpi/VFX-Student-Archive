@@ -38,5 +38,6 @@ import NavBar from './components/NavBar.vue';
   main#app {
     border-inline: 1px solid var(--border);
     margin: 0 auto;
+    width: 100%;
   }
 </style>

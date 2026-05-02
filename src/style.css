@@ -52,7 +52,7 @@
 
 body {
   margin: 0;
-  width: 95%;
+  width: 100%;
   align-items: center;
 }
 
@@ -160,6 +160,7 @@ code {
 
 #app {
   width: 1126px;
+  width: 100%;
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
@@ -180,7 +181,7 @@ code {
   /* flex-grow: 1; */
 
   @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
+    padding-inline: auto;
     gap: 18px;
   }
 }
