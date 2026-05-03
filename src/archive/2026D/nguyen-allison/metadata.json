@@ -1,44 +1,54 @@
 {
   "author": {
     "name": "Allison Nguyen",
-    "graduation_year": "2027",
-    "major": "CS/IMGD",
-    "contact_email": "jdoe@wpi.edu",
-    "portfolio_url": "https://janedoe.com"
+    "graduation_year": "2026",
+    "major": "Interactive Media and Game Development",
+    "contact_email": "anguyen7@wpi.edu",
+    "portfolio_url": "https://YOUR_WEBSITE_(if_you_have_one).com",
+
+    "instructions": "Fill out all relevant fields in this document. If you are not using a field (i.e., you don't have any code blocks) then fully delete that field. Within the 'projects' array below, include 1 entry for each of your experiments. You can copy and past for additional projects."
   },
+
   "projects": [
-    {
-      "course_id": "IMGD-3000",
-      "semester": "2026-Spring",
-      "project_title": "Audio-Reactive Niagara Storm",
-      "tags": ["Niagara", "Lumen", "Metasounds"],
-      "engine_version": "5.7.4",
-      "instruction_count": 184,
-      "blueprint_url": "https://blueprintue.com/render/xxxx1/",
-      "video_file": "storm-vfx-demo.mp4",
-      "description": "Exploration of linking Metasound envelope followers to Niagara spawn rates to create a storm that reacts to audio amplitude."
+      {
+      "course_id": "IMGD-4099",
+      "term": "D-Term 2026",
+      "project_title": "LED Screen Material",
+      "engine_version": "5.6.1",
+      "description": "This is a material that mimics the look of an LED screen. It was created using Nikolay Shamaev's 'Realistic LED emissive screen material' tutorial.",
+      
+      "tags":           ["Shader", "Material"], 
+      "video_file":     ["https://youtu.be/VHgDp6VPtvU","https://youtu.be/4cJXZpAbxcg?si=0YQWHDKb4qcGnR4-"],
+      "blueprint_url":  ["https://blueprintue.com/blueprint/lcm3_98q/"],
+      "codeFile":       "Nguyen_Allison_4099_VFX_Bibliography.txt",
+      "codeLang":       "txt"
     },
     {
-      "course_id": "IMGD-3000",
-      "semester": "2026-Spring",
-      "project_title": "Procedural Lightning Ribbon",
-      "tags": ["HLSL", "Ribbon-Emitter", "Lumen"],
-      "engine_version": "5.7.4",
-      "instruction_count": 92,
-      "blueprint_url": "https://blueprintue.com/render/xxxx2/",
-      "video_file": "lightning-vfx-demo.mp4",
-      "description": "A custom HLSL shader driving a Niagara ribbon emitter to simulate branching lightning strikes with real-time Lumen emission."
+      "course_id": "IMGD-4099",
+      "term": "D-Term 2026",
+      "project_title": "Stylized Comic Material",
+      "engine_version": "5.6.1",
+      "description": "This is a material shader that creates a comic-like halftone shaded look. It was created using Unreal Engine's 'Stylized Comic Ink Material' tutorial and was modified to be used for halftones and add color. There are options to change the two colors and offset/size of halftone.",
+
+      "tags":           ["Shader", "Material"], 
+      "video_file":     ["https://youtu.be/j2nxD05-NVc","https://youtu.be/rpmm3PPxJzM?si=7uvd0tIGPT74CVt0"],
+      "blueprint_url":  ["https://blueprintue.com/blueprint/-4qd43py/"],
+      "codeFile":       "Nguyen_Allison_4099_VFX_Bibliography.txt",
+      "codeLang":       "txt"
     },
     {
-      "course_id": "IMGD-4000",
-      "semester": "2026-Fall",
-      "project_title": "Advanced Fluid Dynamics",
-      "tags": ["EmberGen", "VDB", "Volumetrics"],
-      "engine_version": "5.8.0",
-      "instruction_count": 310,
-      "blueprint_url": "https://blueprintue.com/render/xxxx3/",
-      "video_file": "fluid-vfx-demo.mp4",
-      "description": "Integration of EmberGen VDB exports into Unreal using the new volumetric rendering pipeline for realistic fire and smoke."
+      "course_id": "IMGD-4099",
+      "term": "D-Term 2026",
+      "project_title": "Bitmap Post-Process Material",
+      "engine_version": "5.6.1",
+      "description": "This is a post-process material [ADD TO LATER]. It was created using Nils Gallist's 'Realtime Bitmap Shader' tutorial and was modified to add options for three-tone and full colors",
+      
+      "tags":           ["Shader", "Material", "Post Process", "Post-Process"], 
+      "video_file":     ["https://youtu.be/IeWX_xGbx6Y","https://youtu.be/pwr-H1hro4s?si=y5jNKeHPFQ8tAa0z"],
+      "pdf_file":       ["Nguyen_Allison_4099_VFX_Debrief.pdf"],
+      "blueprint_url":  ["https://blueprintue.com/blueprint/dma7_cox/"],
+      "codeFile":       "Nguyen_Allison_4099_VFX_Bibliography.txt",
+      "codeLang":       "txt"
     }
   ]
 }

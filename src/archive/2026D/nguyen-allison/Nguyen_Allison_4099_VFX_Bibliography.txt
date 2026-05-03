@@ -1,0 +1,4 @@
+﻿“Create A Customizable Realtime Bitmap Shader in Unreal Engine 5.” Posted May 28, 2022, by Nils Gallist. YouTube, 14 min., 25 sec., https://youtu.be/pwr-H1hro4s?si=y5jNKeHPFQ8tAa0z 
+“How To Create Hologram And Glitch Effects - Unreal Engine 5 Materials Tutorial.” Posted January 12, 2025, by Pitchfork Academy, YouTube, 32 min., 53 sec,. https://youtu.be/LOKYUgfZI6Y?si=Jz7mO6JqBO8ICj3z 
+“Realistic LED emissive screen material with RGB pixels in Unreal Engine 5 | Tutorial.” Posted March 9, 2023, by Nikolay Shamaev. YouTube, 14 min., 38 sec., https://youtu.be/4cJXZpAbxcg?si=0YQWHDKb4qcGnR4- 
+“Stylized Comic Ink Material | Unreal Engine Animation Hub.” Posted January 23, 2026, by Unreal Engine. YouTube, 1 min., 59 sec., https://youtu.be/rpmm3PPxJzM?si=7uvd0tIGPT74CVt0

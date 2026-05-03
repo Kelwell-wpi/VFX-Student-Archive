@@ -1,0 +1,54 @@
+{
+  "author": {
+    "name": "Joaquin Donahue",
+    "graduation_year": "2026",
+    "major": "IMGD BA",
+    "contact_email": "jldonahue@wpi.edu",
+    "portfolio_url": "https://sites.google.com/view/joaqun-donahue/home"
+  },
+
+  "projects": [
+    {
+      "course_id": "IMGD-4099",
+      "term": "D-Term 2026",
+      "project_title": "Sword Slash VFX",
+      "engine_version": "5.6.1",
+      "description": "Sword Slash VFX that layers multiple effects within one Niagara System. It emits a mesh with a custom materi",
+
+      "tags":           ["Niagara", "Sword Slash", "Material"], 
+      "video_file":     ["https://www.youtube.com/watch?v=LAlkqHjinio","https://www.youtube.com/watch?v=djlnnPvFR0Q&list=PLoKWe7r9HkWzRW6H3hkZSlBuw0m_ZwFNN&index=4"],
+      "hasTutorial":    true,
+      "archivePath":    "2026D/donahue-joaquin/T1",
+      "codeFile":       "Donahue_Bibliography.txt",
+      "codeLang":       "txt"
+    },
+    {
+      "course_id": "IMGD-4099",
+      "term": "D-Term 2026",
+      "project_title": "Stylized Waterfall VFX",
+      "engine_version": "5.6.1",
+      "description": "Stylized Waterfall VFX that layers multiple effects within one Niagara System. It emits three different meshes multiple times with custom materials.",
+      
+      "tags":           ["Niagara", "Water", "Stylized", "Waterfall"], 
+      "video_file":     ["https://www.youtube.com/watch?v=LAlkqHjinio","https://www.youtube.com/watch?v=graozMcShMA"],
+      "hasTutorial":    true,
+      "archivePath":    "2026D/donahue-joaquin/T1",
+      "codeFile":       "Donahue_Bibliography.txt",
+      "codeLang":       "txt"
+    },
+    {
+      "course_id": "IMGD-4099",
+      "term": "D-Term 2026",
+      "project_title": "Sci-fi Barrier VFX",
+      "engine_version": "5.6.1",
+      "description": "Sci-fi Barrier VFX that spawns a mesh in Niagara. The effect uses custom textures the tutorial teaches you how to make",
+      
+      "tags":           ["Niagara", "Sci-fi", "Barrier", "Material"], 
+      "video_file":     ["https://www.youtube.com/watch?v=LAlkqHjinio","https://www.youtube.com/watch?v=omkwqdWMB_U"],
+      "hasTutorial":    true,
+      "archivePath":    "2026D/donahue-joaquin/T1",
+      "codeFile":       "Donahue_Bibliography.txt",
+      "codeLang":       "txt"
+    }
+  ]
+}

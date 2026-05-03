@@ -147,6 +147,10 @@ watch(() => props.path, loadTutorial);
   padding-bottom: 10px;
 }
 
+.tutorial-content :deep(h3) {
+  margin-top: 100px;
+}
+
 .tutorial-content :deep(ul), 
 .tutorial-content :deep(ol) {
   margin-bottom: 1.5rem;
