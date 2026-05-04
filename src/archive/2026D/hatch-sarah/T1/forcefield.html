@@ -1,0 +1,26 @@
+
+<h3> Forcefield and projectiles </h3>
+
+
+<img src="./images/ForcefieldCollision.gif" alt="Snow begins when player enters circle" />
+
+
+<h3> Forcefield </h3>
+    <ul><li>Sphere (with collisions enabled) </li></ul>
+
+<p>On hit collision hit event, spawns a Niagara system. Uses the position and collision normal to spawn on the surface of the sphere pointing the correct direction. Here I am using the collision system directly. A collision between two objects creates a hit event for both objects. In this case on the forcefield side I am receiving the hit event and doing some action. (spawning the Niagara system). 
+</p>
+
+
+<p>There are multiple ways to do projectiles </p>
+
+<p>Above is physical bullets computed on the forcefield side. I have learned that this is actually suboptimal. A better way would be to have the projectile determine what it hit and call a function on the forcefield side. This would allow a wider range of options for collisions, instead of physically colliding (has various issues including performance and math errors at high speeds) line traces and sphere traces can be done to see if objects hit. Those traces only create hit events on the projectile side, but we can see what they hit and call a hit function with the relevant information.  </p>
+
+<p>This could also be done with a Niagara system, call sphere trace at the point of contact to see what you hit. </p>
+
+<p>So the way that makes the most sense would be to have an interface for hit-able objects with a function for receiving the hit information, then using line trace or sphere trace to determine whether it hits. This would also work with physical bullets, as on hit they would see what they hit and if they implemented that interface called the appropriate function. </p>
+
+<p>Here is a great video of implementing interfaces:<a href="https://www.youtube.com/watch?v=wGmlKbllPcw">Blueprint Interfaces | Unreal Engine 5 Tutorial, Tyler Serino  </a></p>
+
+
+ 

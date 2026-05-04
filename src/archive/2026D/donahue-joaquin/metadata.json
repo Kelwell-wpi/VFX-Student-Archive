@@ -20,7 +20,8 @@
       "hasTutorial":    true,
       "archivePath":    "2026D/donahue-joaquin/T1",
       "codeFile":       "Donahue_Bibliography.txt",
-      "codeLang":       "txt"
+      "codeLang":       "txt",
+      "override_thumb": true
     },
     {
       "course_id": "IMGD-4099",
@@ -48,7 +49,8 @@
       "hasTutorial":    true,
       "archivePath":    "2026D/donahue-joaquin/T1",
       "codeFile":       "Donahue_Bibliography.txt",
-      "codeLang":       "txt"
+      "codeLang":       "txt",
+      "override_thumb": true
     }
   ]
 }

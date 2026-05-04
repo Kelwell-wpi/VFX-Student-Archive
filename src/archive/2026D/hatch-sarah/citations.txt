@@ -1,0 +1,48 @@
+Blueprint Interfaces
+   Serino, Tyler, Blueprint Interfaces | Unreal Engine 5 Tutorial, 2023,https://www.youtube.com/watch?v=wGmlKbllPcw
+
+Niagara Resources 
+
+Connection Unreal to Blueprints 
+
+   
+    Naseer, Nazzal, UNREAL DEV COMMUNITY SITE Blueprint Module: Controlling Niagara Particles (Part 1), Sept 26th 2025, https://dev.epicgames.com/community/learning/tutorials/vaEw/unreal-engine-blueprint-module-controlling-niagara-particles-part-1
+    Shows how to activate Niagara systems programmatically. 
+
+    gameDev Outpost, UE4 - Niagara Export Particle Data to Blueprint – Collision, Feb 10, 2021, https://www.youtube.com/watch?v=aA_8NLzbUTA
+
+    Various forum users, UE FOROMS Blueprint Collision events from Niagara, 2019 - 2024,https://forums.unrealengine.com/t/blueprint-collision-events-from-niagara/456264
+ 
+
+Creating Niagara particles  
+    Coreb Games, UE5 | Poison Bubble Effect | Niagara VFX Tutorial | UE5, Jan 17, 2023, https://www.youtube.com/watch?v=FjAEYMIjMNM
+    
+    Royal Skies, Unreal5 Niagara VFX: Crash-Course (INTRODUCTION!), Jul 31, 2023, https://www.youtube.com/watch?v=8k0vuDD_cE0
+    
+    Coreb Games, UE5 | How To Create Magic Circle Niagara Effect | VFX Tutorial | Unreal Engine 5,  Jan 23, 2024, https://www.youtube.com/watch?v=KEPaj9k9n7Q
+    
+    Gabriel Aguiar Pd., Unreal Engine 5 - Stylized Smoke VFX - Niagara Tutorial, Mar 12, 2024,  https://www.youtube.com/watch?v=HRagD5L-WF8
+
+    CodeLikeMe, Unreal Engine 5 Snow Particle Tutorial, Aug 7, 2022, https://www.youtube.com/watch?v=sUW3or-YCrk
+
+
+    UnrealCG, Advanced Reactive Force Fields - with Niagara in UE5, Apr 27, 2024, https://www.youtube.com/watch?v=8QI6WLbrFEY
+
+    CGHOW, Create a Healing Spell in UE5.5: Ultimate Niagara VFX Tutorial, Nov 12, 2024, https://www.youtube.com/watch?v=dhgRINBVOZw
+    
+
+Optimization 
+
+    MORE VFX Academy, Complete Guide to Niagara VFX Optimization in Unreal Engine, May 23, 2025 https://morevfxacademy.com/complete-guide-to-niagara-vfx-optimization-in-unreal-engine/
+
+    MORE VFX Academy, Niagara VFX Optimization: Part 2 — Profiling, Scalability, and Performance Tips, June 17, 2025, https://morevfxacademy.com/niagara-vfx-optimization-part-2-profiling-scalability-and-performance-tips/
+    How to read the profilers. You might not need these for a while, but if you do here is a guide. 
+
+ 
+
+ 
+
+Breakdowns of different effects 
+    CGSHOW, Breakdown - Spell Breaker FX in UE5.3 Niagara, Dec 14, 2025, https://www.youtube.com/watch?v=6AJkngIqLA4
+
+    Cool Cat VFX, [Noara] Waterfall,  Jan 29, 2022, https://www.youtube.com/watch?v=XIrebDJUzb4

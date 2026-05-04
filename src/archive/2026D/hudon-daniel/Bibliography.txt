@@ -1,0 +1,12 @@
+Bibliography
+Jam2go. 2024. “Real-Time Datamoshing in Unreal Looks Mesmerizing.” YouTube. August 27, 2024. https://www.youtube.com/watch?v=Uapad3pVxBY.
+
+Lisowi. 2023. “Morph/Transform Tutorial - Unreal Engine 5.2.” YouTube. July 7, 2023. https://www.youtube.com/watch?v=BkS-oa95c3o.
+
+MrKosiej. 2022. “UE5 Simple Metaball Shader Using Distance Fields.” YouTube. December 18, 2022. https://www.youtube.com/watch?v=EHY_iHpqYkk.
+
+SARKAMARI. 2023. “#UE5 Series: The Beginner’s Guide to Niagara.” YouTube. July 22, 2023. https://www.youtube.com/watch?v=SAAZRWBry_I&list=PLnvAM3V78M2pD4oN07PiwR9Q111d7G4-I&index=2.
+
+SoftTofuVFX. 2023. “Ue5 Rain Tutorial | Niagara Rain Tutorial.” YouTube. August 15, 2023. https://www.youtube.com/watch?v=A6NPb6Jlems.
+
+u/Garage_Heathen. 2025. “Datamoshing Effect with Shader Graph (Details in First Post).” Reddit.com. 2025. https://www.reddit.com/r/Unity3D/comments/1hjxi30/datamoshing_effect_with_shader_graph_details_in/.

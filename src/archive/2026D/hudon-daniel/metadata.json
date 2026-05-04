@@ -1,44 +1,62 @@
 {
   "author": {
     "name": "Daniel Hudon",
-    "graduation_year": "2027",
-    "major": "CS/IMGD",
-    "contact_email": "jdoe@wpi.edu",
-    "portfolio_url": "https://janedoe.com"
+    "graduation_year": "2026",
+    "major": "IMGD BA - Technical Art Concentration - Computer Science Minor",
+    "contact_email": "djhudon@wpi.edu",
+    "portfolio_url": "https://design44.github.io/portfolio/",
+
+    "instructions": "Fill out all relevant fields in this document. If you are not using a field (i.e., you don't have any code blocks) then fully delete that field. Within the 'projects' array below, include 1 entry for each of your experiments. You can copy and past for additional projects."
   },
+
   "projects": [
     {
-      "course_id": "IMGD-3000",
-      "semester": "2026-Spring",
-      "project_title": "Audio-Reactive Niagara Storm",
-      "tags": ["Niagara", "Lumen", "Metasounds"],
-      "engine_version": "5.7.4",
-      "instruction_count": 184,
-      "blueprint_url": "https://blueprintue.com/render/xxxx1/",
-      "video_file": "storm-vfx-demo.mp4",
-      "description": "Exploration of linking Metasound envelope followers to Niagara spawn rates to create a storm that reacts to audio amplitude."
+      "course_id": "IMGD-4099",
+      "term": "D-Term 2026",
+      "project_title": "Glitch Cloak Shader",
+      "engine_version": "5.6.1",
+      "description": "A post-processing shader based on datamoshing techniques that uses motion vectors to create a distortion effect to use for 'glitches' or cloaking. Contains parameters to control via material instance: Intensity, NoiseScale, StencilMaskValue, VelocityScale; and toggles for UseNoise, UseStencilMask, and VisibleThroughObjects. Also included is a particle effect I used with the shader.",
+
+      "tags":           ["Post Process", "Shaders", "Datamosh", "Noise", "Motion Vectors", "Glitch", "Niagara", "Blueprints"],
+      "video_file":     ["https://youtu.be/RzAPkSiFAto"],
+      "blueprint_url":  ["https://blueprintue.com/blueprint/imdkh2ah/", "https://blueprintue.com/blueprint/0_xboa2i/", "https://blueprintue.com/blueprint/j2ywfqg6/"],
+      "hasTutorial":    true,
+      "archivePath":    "2026D/hudon-daniel/T1",
+      "codeFile":       "Bibliography.txt",
+      "codeLang":       "txt"
     },
     {
-      "course_id": "IMGD-3000",
-      "semester": "2026-Spring",
-      "project_title": "Procedural Lightning Ribbon",
-      "tags": ["HLSL", "Ribbon-Emitter", "Lumen"],
-      "engine_version": "5.7.4",
-      "instruction_count": 92,
-      "blueprint_url": "https://blueprintue.com/render/xxxx2/",
-      "video_file": "lightning-vfx-demo.mp4",
-      "description": "A custom HLSL shader driving a Niagara ribbon emitter to simulate branching lightning strikes with real-time Lumen emission."
+      "course_id": "IMGD-4099",
+      "term": "D-Term 2026",
+      "project_title": "Slime Shader & Particles",
+      "engine_version": "5.6.1",
+      "description": "A slime effect consisting of a metaball shader and niagara particles. Takes the form of a slime ball that sticks to nearby surfaces, and bubbles that stick to the main body.",
+      
+      "tags":           ["Niagara", "Shader", "Material", "Metaballs"], 
+      "video_file":     ["https://www.youtube.com/watch?v=viRv-jRdi6k"],
+      "blueprint_url":  ["https://blueprintue.com/blueprint/r55rx2k_/", "https://blueprintue.com/blueprint/kgp--_pt/"]
     },
     {
-      "course_id": "IMGD-4000",
-      "semester": "2026-Fall",
-      "project_title": "Advanced Fluid Dynamics",
-      "tags": ["EmberGen", "VDB", "Volumetrics"],
-      "engine_version": "5.8.0",
-      "instruction_count": 310,
-      "blueprint_url": "https://blueprintue.com/render/xxxx3/",
-      "video_file": "fluid-vfx-demo.mp4",
-      "description": "Integration of EmberGen VDB exports into Unreal using the new volumetric rendering pipeline for realistic fire and smoke."
+      "course_id": "IMGD-4099",
+      "term": "D-Term 2026",
+      "project_title": "Rain Particles",
+      "engine_version": "5.6.1",
+      "description": "Two types of rain particle systems in niagara. The CPU Rain spawns splashes on impact but has a higher performance cost, while the GPU Rain simply has the drops bounce and has a lower performance cost.",
+      
+      "tags":           ["Niagara", "CPU", "GPU"], 
+      "video_file":     ["https://youtu.be/QA17-dT0wyQ"],
+      "blueprint_url":  ["https://blueprintue.com/blueprint/b-_0xzmm/", "https://blueprintue.com/blueprint/jj_yuz0w/"]
+    },
+    {
+      "course_id": "IMGD-4099",
+      "term": "D-Term 2026",
+      "project_title": "Morph Particles - Puff of Smoke",
+      "engine_version": "5.6.1",
+      "description": "A puff of smoke Niagara particle effect for use as a morph animation. Also included is the blueprint code to trigger the morph.",
+      
+      "tags":           ["Niagara", "Blueprints"], 
+      "video_file":     ["https://youtu.be/gWfpqN41LKo"],
+      "blueprint_url":  ["https://blueprintue.com/blueprint/j8_my6jo/, https://blueprintue.com/blueprint/7w657k44/"]
     }
   ]
 }

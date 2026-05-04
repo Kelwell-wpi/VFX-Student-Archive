@@ -119,13 +119,25 @@
       >
         <div class="media-container">
           <img 
-            v-if="project.videoUrl"
+            v-if="project.override_thumb",
+            src="@/assets/VFX-thumb.png" 
+            class="gallery-thumb"
+            alt="Project Placeholder"
+          />
+          <img 
+            v-else-if="project.videoUrl"
             :src="getThumbnailUrl(project.videoUrl)" 
             @error="(e) => e.target.src = missingThumb"
             referrerpolicy="no-referrer"
             class="gallery-thumb"
             alt="Video Thumbnail"
           />  
+          <img 
+            v-else
+            src="@/assets/VFX-thumb.png" 
+            class="gallery-thumb"
+            alt="Project Placeholder"
+          />
         </div>
 
         <div class="card-body">

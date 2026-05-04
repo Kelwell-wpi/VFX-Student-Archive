@@ -2,43 +2,49 @@
   "author": {
     "name": "Sarah Hatch",
     "graduation_year": "2027",
-    "major": "CS/IMGD",
-    "contact_email": "jdoe@wpi.edu",
-    "portfolio_url": "https://janedoe.com"
+    "major": "IMGD BS & CS Double Major",
+    "contact_email": "smhatch@wpi.edu",
+
+    "instructions": "Fill out all relevant fields in this document. If you are not using a field (i.e., you don't have any code blocks) then fully delete that field. Within the 'projects' array below, include 1 entry for each of your experiments. You can copy and past for additional projects."
   },
+
   "projects": [
     {
-      "course_id": "IMGD-3000",
-      "semester": "2026-Spring",
-      "project_title": "Audio-Reactive Niagara Storm",
-      "tags": ["Niagara", "Lumen", "Metasounds"],
-      "engine_version": "5.7.4",
-      "instruction_count": 184,
-      "blueprint_url": "https://blueprintue.com/render/xxxx1/",
-      "video_file": "storm-vfx-demo.mp4",
-      "description": "Exploration of linking Metasound envelope followers to Niagara spawn rates to create a storm that reacts to audio amplitude."
+      "course_id": "IMGD-4099",
+      "term": "D-Term 2026",
+      "project_title": "Writeup Using Blueprints to modify VFX",
+      "engine_version": "5.6.2",
+      "description": "Discussion of how Blueprints can modify and interact with Niagara systems and dynamic material instances.",
+      "tags":           ["Niagara", "Dynamic Materials", "Blueprints"], 
+
+      "pdf_file":       ["Hatch_UnrealConnections.pdf"],
+      "codeFile":       "citations.txt",
+      "codeLang":       "txt"
     },
     {
-      "course_id": "IMGD-3000",
-      "semester": "2026-Spring",
-      "project_title": "Procedural Lightning Ribbon",
-      "tags": ["HLSL", "Ribbon-Emitter", "Lumen"],
-      "engine_version": "5.7.4",
-      "instruction_count": 92,
-      "blueprint_url": "https://blueprintue.com/render/xxxx2/",
-      "video_file": "lightning-vfx-demo.mp4",
-      "description": "A custom HLSL shader driving a Niagara ribbon emitter to simulate branching lightning strikes with real-time Lumen emission."
+      "course_id": "IMGD-4099",
+      "term": "D-Term 2026",
+      "project_title": "Weather Circles",
+      "engine_version": "5.6.2",
+      "description": "Niagara magic circles that activate when the player enters and change the weather. Niagara snowfall and rainfall emitters.",
+      
+      "tags":           ["Niagara", "Blueprints", "Dynamic Materials", "Snow", "Rain"], 
+      "video_file":     ["https://vimeo.com/1188891833?share=copy&fl=sv&fe=ci"],
+      "blueprint_url":  ["https://blueprintue.com/blueprint/1zr42xno/", "https://blueprintue.com/blueprint/awi3bp2e/"],
+      "hasTutorial":    true,
+      "archivePath":    "2026D/hatch-sarah/T2"
     },
     {
-      "course_id": "IMGD-4000",
-      "semester": "2026-Fall",
-      "project_title": "Advanced Fluid Dynamics",
-      "tags": ["EmberGen", "VDB", "Volumetrics"],
-      "engine_version": "5.8.0",
-      "instruction_count": 310,
-      "blueprint_url": "https://blueprintue.com/render/xxxx3/",
-      "video_file": "fluid-vfx-demo.mp4",
-      "description": "Integration of EmberGen VDB exports into Unreal using the new volumetric rendering pipeline for realistic fire and smoke."
+      "course_id": "IMGD-4099",
+      "term": "D-Term 2026",
+      "project_title": "Forcefield",
+      "engine_version": "5.6.3",
+      "description": "A simple forcefield effect that react to collision events. Additionally a discussion of better ways to handle projectile collisions.",
+
+      "tags":           ["Niagara", "Collisions", "Blueprints", "Projectiles"], 
+      "blueprint_url":  ["https://blueprintue.com/blueprint/fozk8lg0/"],
+      "hasTutorial":    true,
+      "archivePath":    "2026D/hatch-sarah/T1"
     }
   ]
 }

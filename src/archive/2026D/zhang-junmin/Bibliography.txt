@@ -1,0 +1,26 @@
+Realistic Nuclear Explosions | Embergen 1.1 + Blender Beginner Tutorial
+https://www.youtube.com/watch?v=1cxoO4JUc4g&t=221s
+
+EmberGen 0.7.5 Live Training #1: Creating Explosions & Fire
+https://www.youtube.com/watch?v=viyZZz20tLs&t=4s
+
+EmberGen 1.0 Tutorial: Getting Started With The UI
+https://www.youtube.com/watch?v=Wwu4KrdYBY8&list=PL62z6VLhRxEymgOJpIG_3IyPmIPn8iCcw
+
+Lighting in Unreal Engine 5 for Beginners
+https://www.youtube.com/watch?v=fSbBsXbjxPo&t=403s
+
+Unreal Engine Materials in 6 Levels of Complexity
+https://www.youtube.com/watch?v=iZgbzwBQTPY&t=374s
+
+EASY Road and Junction Tutorial for Unreal Engine 5 [+ FREE ROAD MESH!]
+https://www.youtube.com/watch?v=RCv3dFUjOf0
+
+Unreal Engine 5 Beginner Tutorial - UE5 Starter Course
+https://www.youtube.com/watch?v=k-zMkzmduqI&t=113s
+
+How To Make Roads with Landscape Splines and PCG in Unreal Engine 5
+https://www.youtube.com/watch?v=_NEybBdACCo&t=66s
+
+Import EmberGen VDBs into Unreal Engine 5 – Step-by-Step Guide
+https://www.youtube.com/watch?v=YyiI2ijNRbc&t=61s

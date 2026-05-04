@@ -65,7 +65,7 @@
     if (vimeoId) return `https://vumbnail.com/${vimeoId}.jpg`;
     const gdId = getGoogleDriveId(url);
     if (gdId) return `https://drive.google.com/thumbnail?id=${gdId}&sz=w1280`;
-    return "";
+    return '';
   };
 
   const buildArchive = () => {
@@ -279,7 +279,9 @@
                 :to="{ name: 'project-detail', params: { id: other.id } }"
                 class="mini-card"
               >
-                <img :src="getThumbnailUrl(other.videoUrls[0])" alt="" />
+              <img v-if="other.override_thumb" src="@/assets/VFX-thumb.png"/>
+                <img v-else-if="other.videoUrls && other.videoUrls.length > 0" :src="getThumbnailUrl(other.videoUrls[0])" alt="" />
+                <img v-else src="@/assets/VFX-thumb.png"/>
                 <p>{{ other.project_title }}</p>
               </router-link>
             </div>
